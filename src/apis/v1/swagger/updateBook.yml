@@ -1,0 +1,11 @@
+summary: Update a book
+tags:
+  - books
+consumes:
+  - application/json
+
+
+responses:
+    200:
+      description: The book has been updated successfully
+      

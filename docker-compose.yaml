@@ -1,0 +1,43 @@
+services:
+  app-dev:
+    container_name: settle-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: settle-dev
+    volumes:
+      - ./:/app
+    # networks:
+    #   - settle-dev
+    environment:
+      - HOST_URL=localhost:5003
+    ports:
+      - 5003:5002
+    profiles:
+      - dev
+    tty: true
+    stdin_open: true
+
+  app-prod:
+    container_name: settle-prod
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: settle-prod
+    ports:
+      - 5002:5002
+    profiles:
+      - prod
+
+  # mongo:
+  #   container_name: flask-app-mongo
+  #   image: mongo
+  #   environment:
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: camera-detector-mongo-password
+  #   volumes:
+  #     - camera-detector-db:/data/db
+  #   profiles:
+  #     - dev
+  #   networks:
+  #     - camera-detector

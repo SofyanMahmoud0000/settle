@@ -1,0 +1,11 @@
+summary: List books
+tags:
+  - books
+consumes:
+  - application/json
+
+
+responses:
+    200:
+      description: List the books successfully
+      

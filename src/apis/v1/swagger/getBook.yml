@@ -1,0 +1,11 @@
+summary: Get a book by id
+tags:
+  - books
+consumes:
+  - application/json
+
+
+responses:
+    200:
+      description: Get the book successfully
+      

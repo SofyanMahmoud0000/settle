@@ -1,0 +1,6 @@
+flask
+flasgger
+flask_cors
+python-dotenv
+mysql-connector-python
+marshmallow
