@@ -1,43 +1,52 @@
 services:
   app-dev:
-    container_name: settle-dev
+    container_name: settle-app-dev
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: ./docker/Dockerfile.dev
     image: settle-dev
     volumes:
       - ./:/app
-    # networks:
-    #   - settle-dev
     environment:
       - HOST_URL=localhost:5003
     ports:
       - 5003:5002
     profiles:
       - dev
+    depends_on:
+      - db-connection
     tty: true
     stdin_open: true
 
-  app-prod:
-    container_name: settle-prod
-    build:
-      context: .
-      dockerfile: Dockerfile.prod
-    image: settle-prod
-    ports:
-      - 5002:5002
-    profiles:
-      - prod
 
-  # mongo:
-  #   container_name: flask-app-mongo
-  #   image: mongo
-  #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: root
-  #     MONGO_INITDB_ROOT_PASSWORD: camera-detector-mongo-password
-  #   volumes:
-  #     - camera-detector-db:/data/db
-  #   profiles:
-  #     - dev
-  #   networks:
-  #     - camera-detector
+  db-connection:
+    container_name: settle-db-connection
+    image: mysql
+    volumes:
+      - ./docker:/app
+    command: mysql -hdb-server -uroot -ppassword -e "SET autocommit=0 ; source /app/db.sql ; COMMIT ;"
+    depends_on:
+      - db-server
+    restart: on-failure
+    profiles:
+      - dev
+
+  db-server:
+    container_name: settle-db-server
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - 3307:3306
+    volumes:
+      - settle:/var/lib/mysql
+    profiles:
+      - dev
+  
+networks:
+  default:
+    name: settle
+
+volumes:
+  settle:
+    name: settle
