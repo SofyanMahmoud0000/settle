@@ -23,7 +23,12 @@ def listBooks():
 @swag_from('swagger/getBook.yml')
 def getBook(id):
   try: 
+    errors = getBookByIdValidation.validate({"id": id})
+    if(errors):
+      raise BadRequest(payload={"errors": errors})
     result = controller.get(id)
+    if result is None:
+      raise NotFound(message="This book doesn't exists")
     return Response.ok(result)
 
   except CustomError as e:

@@ -55,3 +55,12 @@ responses:
           "message": "Internal error, try again or see the logs",
           "success": false
         }
+
+    404:
+      description: Not found
+      schema:
+        type: object
+        example: {
+          "message": "This author doesn't exist",
+          "success": false
+        }

@@ -4,10 +4,10 @@ from . import *
 class CreateBookValidations(Schema):
   """
   Parameters:
-    - name (datetime)
-    - price (datetime)
-    - release_date (int)
-    - category (int)
+    - name (string)
+    - price (int)
+    - release_date (date)
+    - category (string)
     - author_id (int)
   """
   
@@ -18,3 +18,15 @@ class CreateBookValidations(Schema):
   author_id = fields.Int(required=True)
    
 createBookValidation = CreateBookValidations()
+
+
+class GetBookByIdValidation(Schema):
+  """
+  Parameters:
+    - id (int)
+  """
+  
+  id = fields.Int(required=True)
+  
+getBookByIdValidation = GetBookByIdValidation()
+  

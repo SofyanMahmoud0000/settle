@@ -14,4 +14,13 @@ parameters:
 responses:
     200:
       description: Get the book successfully
+
+    404:
+      description: Not found
+      schema:
+        type: object
+        example: {
+          "message": "This book doesn't exist",
+          "success": false
+        }
       

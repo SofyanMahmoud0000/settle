@@ -27,6 +27,8 @@ class Book(Connection):
     query = """SELECT * FROM books WHERE id={}""".format(id)
     cursor = super().select(query)
     data = cursor.fetchone()
+    if data is None:
+      return None
     result = {
         "id": data[0], 
         "name": data[1], 
@@ -44,6 +46,12 @@ class Book(Connection):
     query = query[0: -1]
     query += " WHERE id = {}".format(id)
     super().update(query)
+    
+  def checkExists(self, id):
+    query = "SELECT 1 FROM books WHERE id = {}".format(id)
+    cursor = super().select(query)
+    data = cursor.fetchone()
+    return True if data is not None else False
     
     
 book = Book()
