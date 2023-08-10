@@ -31,3 +31,27 @@ responses:
     200:
       description: Book has been created successfully
       
+    400:
+      description: Bad request
+      schema:
+        type: object
+        example: {
+          "errors": {
+            "name": [
+              "Missing data for required field."
+            ],
+            "price": [
+              "Missing data for required field."
+            ]
+          },
+          "success": false
+        }
+
+    500:
+      description: Internal server error
+      schema:
+        type: object
+        example: {
+          "message": "Internal error, try again or see the logs",
+          "success": false
+        }

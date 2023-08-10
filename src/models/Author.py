@@ -17,4 +17,10 @@ class Author(Connection):
     result = [{"name": element[1], "birthday": element[2]} for element in data]
     return result
   
+  def checkExists(self, id):
+    query = "SELECT 1 FROM authors WHERE id = {}".format(id)
+    cursor = super().select(query)
+    data = cursor.fetchone()
+    return True if data is not None else False
+  
 author = Author()

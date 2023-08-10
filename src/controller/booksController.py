@@ -1,5 +1,5 @@
 from src.models.Book import book
-from src.models.BookAuthor import bookAuthors
+from . import *
 
 class BooksController:
     def __init__(self):
@@ -7,6 +7,10 @@ class BooksController:
 
     def insert(self, data):
         author_id = data.get("author_id")
+        userExists = author.checkExists(author_id)
+        if userExists is False:
+            raise NotFound(message="This author doesn't exists")
+        
         book_data = [
             (
                 data.get("name"), 

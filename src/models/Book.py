@@ -46,5 +46,4 @@ class Book(Connection):
     super().update(query)
     
     
-  
 book = Book()

@@ -13,8 +13,8 @@ class Response:
     self.success = None
   
   @staticmethod
-  def ok(data, totalCount = 1, pageNo = 1, pageSize = 1):
-    obj = Response(data=data, totalCount=totalCount, pageNo=pageNo, pageSize=pageSize)
+  def ok(data=None, totalCount = 1, pageNo = 1, pageSize = 1, message = None):
+    obj = Response(data=data, totalCount=totalCount, pageNo=pageNo, pageSize=pageSize, message=message)
     obj.success = True
     return make_response(jsonify(obj.__dict__), 200, {'Content-Type': 'application/json'})
     

@@ -1,5 +1,4 @@
 from . import *
-from datetime import datetime
 
 
 booksMethods_bp = Blueprint('books', __name__, url_prefix='/v1/books')
@@ -66,6 +65,10 @@ def updateBook(id):
 @swag_from('swagger/createBook.yml')
 def createBook():
   try: 
+    errors = createBookValidation.validate(request.args)
+    if(errors):
+      raise BadRequest(payload={"errors": errors})
+    
     name = request.args.get("name")
     price = int(request.args.get("price"))
     release_date = request.args.get("release_date")
@@ -80,7 +83,7 @@ def createBook():
       "author_id": author_id
     }
     controller.insert(data)
-    return Response.ok("Create book API")
+    return Response.ok(message="The book has been created successfully")
 
   except CustomError as e:
     if(e.message is not None):
