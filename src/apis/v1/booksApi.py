@@ -1,4 +1,5 @@
 from . import *
+from datetime import datetime
 
 
 booksMethods_bp = Blueprint('books', __name__, url_prefix='/v1/books')
@@ -8,7 +9,8 @@ controller = BooksController()
 @swag_from('swagger/listBooks.yml')
 def listBooks():
   try: 
-    return Response.ok("List books API")
+    result = controller.list()
+    return Response.ok(result)
 
   except CustomError as e:
     if(e.message is not None):
@@ -22,7 +24,8 @@ def listBooks():
 @swag_from('swagger/getBook.yml')
 def getBook(id):
   try: 
-    return Response.ok("Get book API")
+    result = controller.get(id)
+    return Response.ok(result)
 
   except CustomError as e:
     if(e.message is not None):
@@ -32,12 +35,25 @@ def getBook(id):
     logger.error(str(e))
     raise InternalServer()
   
-@booksMethods_bp.route('/', methods=['PUT'])
+@booksMethods_bp.route('/<id>', methods=['PUT'])
 @swag_from('swagger/updateBook.yml')
-def updateBook():
+def updateBook(id):
   try: 
-    return Response.ok("Update book API")
-
+    name = request.args.get("name")
+    price = request.args.get("price")
+    release_date = request.args.get("release_date")
+    category = request.args.get("category")
+    
+    data = {
+      "name": name,
+      "price": price,
+      "release_date": release_date,
+      "category": category,
+      "id": id
+    }
+    
+    controller.update(data)
+    return Response.ok("The book has been updated successfully")
   except CustomError as e:
     if(e.message is not None):
       logger.error(e.message)
@@ -50,6 +66,20 @@ def updateBook():
 @swag_from('swagger/createBook.yml')
 def createBook():
   try: 
+    name = request.args.get("name")
+    price = int(request.args.get("price"))
+    release_date = request.args.get("release_date")
+    category = request.args.get("category")
+    author_id = int(request.args.get("author_id"))
+    
+    data = {
+      "name": name,
+      "price": price,
+      "release_date": release_date,
+      "category": category,
+      "author_id": author_id
+    }
+    controller.insert(data)
     return Response.ok("Create book API")
 
   except CustomError as e:

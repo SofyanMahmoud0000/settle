@@ -1,0 +1,10 @@
+summary: List the Authors
+tags:
+  - authors
+consumes:
+  - application/json
+
+responses:
+    200:
+      description: List authors successfully
+      

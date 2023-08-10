@@ -4,6 +4,28 @@ tags:
 consumes:
   - application/json
 
+parameters:
+  - in: query
+    name: name
+    type: string
+    description: The name of the book e.g. Pro Git
+  - in: query
+    name: price
+    type: integer
+    description: The price of the book e.g. 100
+  - in: query
+    name: release_date
+    type: string
+    format: date
+    description: The release date of the book
+  - in: query
+    name: category
+    type: string
+    description: The category of the book
+  - in: query
+    name: author_id
+    type: integer
+    description: The id of the author
 
 responses:
     200:

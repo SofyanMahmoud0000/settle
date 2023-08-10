@@ -24,4 +24,6 @@ def intiate_app():
 
 def __intiate_modules(app):
     from ..apis.v1.booksApi import booksMethods_bp
+    from ..apis.v1.authorsApi import authorsMethods_bp
     app.register_blueprint(booksMethods_bp)
+    app.register_blueprint(authorsMethods_bp)
