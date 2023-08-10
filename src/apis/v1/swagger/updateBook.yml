@@ -31,4 +31,26 @@ parameters:
 responses:
     200:
       description: The book has been updated successfully
+
+    404:
+      description: Not found
+      schema:
+        type: object
+        example: {
+          "message": "This book doesn't exist",
+          "success": false
+        }
+
+    400:
+      description: Bad request
+      schema:
+        type: object
+        example: {
+          "errors": {
+            "id": [
+              "Not a valid integer."
+            ]
+          },
+          "success": false
+        }
       

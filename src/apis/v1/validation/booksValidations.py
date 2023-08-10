@@ -19,6 +19,24 @@ class CreateBookValidations(Schema):
    
 createBookValidation = CreateBookValidations()
 
+class UpdateBookValidations(Schema):
+  """
+  Parameters:
+    - name (string)
+    - price (int)
+    - release_date (date)
+    - category (string)
+    - id (int)
+  """
+  
+  name = fields.String()
+  price = fields.Int()
+  release_date = fields.Date()
+  category = fields.String()
+  author_id = fields.Int(required=True)
+   
+updateBookValidation = UpdateBookValidations()
+
 
 class GetBookByIdValidation(Schema):
   """

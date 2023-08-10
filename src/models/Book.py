@@ -41,6 +41,7 @@ class Book(Connection):
   def update(self, id, data):
     query = """UPDATE books set """
     for key in data:
+      if data[key] is not None:
         tmp = """{} = '{}',""".format(key, data[key])
         query += tmp
     query = query[0: -1]

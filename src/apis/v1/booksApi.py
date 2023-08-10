@@ -43,6 +43,12 @@ def getBook(id):
 @swag_from('swagger/updateBook.yml')
 def updateBook(id):
   try: 
+    parameters = request.form.to_dict()
+    parameters['id'] = id
+    errors = getBookByIdValidation.validate(parameters)
+    if(errors):
+      raise BadRequest(payload={"errors": errors})
+    
     name = request.args.get("name")
     price = request.args.get("price")
     release_date = request.args.get("release_date")
@@ -56,8 +62,10 @@ def updateBook(id):
       "id": id
     }
     
-    controller.update(data)
-    return Response.ok("The book has been updated successfully")
+    result = controller.update(data)
+    if result is False:
+      raise NotFound(message="This book doesn't exist")
+    return Response.ok(message="The book has been updated successfully")
   except CustomError as e:
     if(e.message is not None):
       logger.error(e.message)

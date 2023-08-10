@@ -33,6 +33,9 @@ class BooksController:
         return book.get(id)
     
     def update(self, data):
+        result = book.checkExists(data.get("id"))
+        if result is False:
+            return False
         bookId = data.get('id')
         del data['id']
         book.update(bookId, data)
