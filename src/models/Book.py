@@ -12,7 +12,7 @@ class Book(Connection):
     
   def list(self, data):
     
-    query = """ select b.*, a.name as author_name from books b
+    queryForTotalCount = """ select count(*) from books b
         join book_authors ba on ba.book_id = b.id
         join authors a on a.id = ba.author_id 
         where a.name like '%{}%' 
@@ -27,7 +27,32 @@ class Book(Connection):
           data.get("minimum_price"), 
           data.get("maximum_price"),
           data.get("oldest_date"),
-          data.get("earliest_date")
+          data.get("earliest_date"),
+        )
+        
+    cursor = super().select(queryForTotalCount)
+    count = cursor.fetchone()[0]
+    
+    
+    query = """ select b.*, a.name as author_name from books b
+        join book_authors ba on ba.book_id = b.id
+        join authors a on a.id = ba.author_id 
+        where a.name like '%{}%' 
+        and category like '%{}%'
+        and b.name like '%{}%'
+        and price >= {} and price <= {}
+        and release_date >= '{}' and release_date <= '{}'
+        limit {} offset {}
+        """.format(
+          data.get("author_name"),
+          data.get("category"),
+          data.get("name"),
+          data.get("minimum_price"), 
+          data.get("maximum_price"),
+          data.get("oldest_date"),
+          data.get("earliest_date"),
+          data.get("pageSize"),
+          data.get("pageSize") * (data.get("pageNo") - 1)
         )
     
     cursor = super().select(query)
@@ -40,7 +65,7 @@ class Book(Connection):
         "category": element[4],
         "author_name": element[5],
        } for element in data]
-    return result
+    return result, count
   
   def get(self, id):
     query = """SELECT * FROM books WHERE id={}""".format(id)
@@ -72,6 +97,6 @@ class Book(Connection):
     cursor = super().select(query)
     data = cursor.fetchone()
     return True if data is not None else False
-    
-    
+  
+  
 book = Book()

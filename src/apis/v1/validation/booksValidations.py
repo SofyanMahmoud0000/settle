@@ -48,6 +48,8 @@ class ListBookValidations(Schema):
     - earliest_date (date)
     - category (string)
     - author_name (string)
+    - pageNo (int)
+    - pageSize (int)
   """
   
   name = fields.String()
@@ -57,6 +59,8 @@ class ListBookValidations(Schema):
   earliest_date = fields.Date()
   category = fields.String()
   author_name = fields.String()
+  pageNo = fields.Int(required=True)
+  pageSize = fields.Int(required=True)
   
 listBookValidation = ListBookValidations()
 

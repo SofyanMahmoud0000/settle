@@ -34,6 +34,12 @@ parameters:
   - in: query
     name: author_name
     description: The name of the author
+  - in: query
+    name: pageNo
+    description: The number of the page
+  - in: query
+    name: pageSize
+    description: The size of the page
 
 responses:
     200:

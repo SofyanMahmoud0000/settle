@@ -20,10 +20,15 @@ def listBooks():
       "category": request.args.get("category") or "",
       "author_name": request.args.get("author_name") or "",
       "name": request.args.get("name") or "",
+      "pageNo": int(request.args.get("pageNo")),
+      "pageSize": int(request.args.get("pageSize"))
     }
     
-    result = controller.list(data)
-    return Response.ok(result)
+    result, totalCount = controller.list(data)
+    return Response.ok(data=result, 
+                       totalCount=totalCount, 
+                       pageNo=data.get("pageNo"),
+                       pageSize=data.get("pageSize"))
 
   except CustomError as e:
     if(e.message is not None):
