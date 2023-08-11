@@ -18,6 +18,19 @@ services:
     tty: true
     stdin_open: true
 
+  app-prod:
+    container_name: settle-app-prod
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.prod
+    image: settle-prod
+    ports:
+      - 5002:5002
+    profiles:
+      - prod
+    depends_on:
+      - db-connection
+    restart: on-failure
 
   db-connection:
     container_name: settle-db-connection
@@ -30,6 +43,7 @@ services:
     restart: on-failure
     profiles:
       - dev
+      - prod
 
   db-server:
     container_name: settle-db-server
@@ -42,6 +56,7 @@ services:
       - settle:/var/lib/mysql
     profiles:
       - dev
+      - prod
   
 networks:
   default:
