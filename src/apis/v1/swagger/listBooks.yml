@@ -4,8 +4,51 @@ tags:
 consumes:
   - application/json
 
+parameters:
+  - in: query
+    name: name
+    type: string
+    description: The name of the books
+  - in: query
+    name: minimum_price
+    type: int
+    description: The minimum price of the books
+  - in: query
+    name: maximum_price
+    type: int
+    description: The maximum price of the books
+  - in: query
+    name: oldest_date
+    type: string
+    format: date
+    description: The oldest date of the books
+  - in: query
+    name: earliest_date
+    type: string
+    format: date
+    description: The earliest date of the books
+  - in: query
+    name: category
+    type: string
+    description: The category of the book
+  - in: query
+    name: author_name
+    description: The name of the author
 
 responses:
     200:
       description: List the books successfully
+
+    400:
+      description: Bad request
+      schema:
+        type: object
+        example: {
+          "errors": {
+            "maximum_price": [
+              "Not a valid integer."
+            ]
+          },
+          "success": false
+        }
       

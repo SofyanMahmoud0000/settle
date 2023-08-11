@@ -9,6 +9,7 @@ controller = AuthorsController()
 @swag_from('swagger/listAuthors.yml')
 def listAuthors():
   try: 
+    
     result = controller.list()
     print("The result of listing the authors is: {}".format(result))
     return Response.ok(result)
@@ -25,6 +26,10 @@ def listAuthors():
 @swag_from('swagger/createAuthor.yml')
 def createAuthor():
   try: 
+    errors = createAuthorValidation.validate(request.args)
+    if(errors):
+      raise BadRequest(payload={"errors": errors})
+    
     name = request.args.get("name")
     birthday = request.args.get("birthday")
     
@@ -33,7 +38,7 @@ def createAuthor():
       "birthday": birthday
     }
     controller.insert(data)
-    return Response.ok("Create book API")
+    return Response.ok(message="The author has been created successfully")
 
   except CustomError as e:
     if(e.message is not None):

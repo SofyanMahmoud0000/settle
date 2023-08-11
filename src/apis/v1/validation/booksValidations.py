@@ -38,6 +38,29 @@ class UpdateBookValidations(Schema):
 updateBookValidation = UpdateBookValidations()
 
 
+class ListBookValidations(Schema):
+  """
+  Parameters:
+    - name (string)
+    - minimum_price (int)
+    - maximum_price (int)
+    - oldest_date (date)
+    - earliest_date (date)
+    - category (string)
+    - author_name (string)
+  """
+  
+  name = fields.String()
+  minimum_price = fields.Int()
+  maximum_price = fields.Int()
+  oldest_date = fields.Date()
+  earliest_date = fields.Date()
+  category = fields.String()
+  author_name = fields.String()
+  
+listBookValidation = ListBookValidations()
+
+
 class GetBookByIdValidation(Schema):
   """
   Parameters:

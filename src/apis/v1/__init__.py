@@ -11,3 +11,4 @@ from src.errorHandler.InternalServer import InternalServer
 from marshmallow import Schema, fields
 from src.helpers.logger import logger
 from .validation.booksValidations import *
+from .validation.authorsValidations import *

@@ -8,7 +8,21 @@ controller = BooksController()
 @swag_from('swagger/listBooks.yml')
 def listBooks():
   try: 
-    result = controller.list()
+    errors = listBookValidation.validate(request.args)
+    if(errors):
+      raise BadRequest(payload={"errors": errors})
+    
+    data = {
+      "minimum_price": request.args.get("minimum_price") or 0,
+      "maximum_price": request.args.get("maximum_price") or 1e6,
+      "oldest_date": request.args.get("oldest_date") or datetime(1979, 12, 11, 0, 0).strftime("%Y-%m-%d"),
+      "earliest_date": request.args.get("earliest_date") or datetime.now().strftime("%Y-%m-%d"),
+      "category": request.args.get("category") or "",
+      "author_name": request.args.get("author_name") or "",
+      "name": request.args.get("name") or "",
+    }
+    
+    result = controller.list(data)
     return Response.ok(result)
 
   except CustomError as e:

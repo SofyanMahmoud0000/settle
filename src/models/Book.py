@@ -10,8 +10,26 @@ class Book(Connection):
                 VALUES (%s, %s, %s, %s)"""
     return super().insert(query, data)
     
-  def list(self):
-    query = """SELECT * FROM books"""
+  def list(self, data):
+    
+    query = """ select b.*, a.name as author_name from books b
+        join book_authors ba on ba.book_id = b.id
+        join authors a on a.id = ba.author_id 
+        where a.name like '%{}%' 
+        and category like '%{}%'
+        and b.name like '%{}%'
+        and price >= {} and price <= {}
+        and release_date >= '{}' and release_date <= '{}'
+        """.format(
+          data.get("author_name"),
+          data.get("category"),
+          data.get("name"),
+          data.get("minimum_price"), 
+          data.get("maximum_price"),
+          data.get("oldest_date"),
+          data.get("earliest_date")
+        )
+    
     cursor = super().select(query)
     data = cursor.fetchall()
     result = [{
@@ -19,7 +37,8 @@ class Book(Connection):
         "name": element[1], 
         "price": element[2],
         "release_date": element[3],
-        "category": element[4]
+        "category": element[4],
+        "author_name": element[5],
        } for element in data]
     return result
   
