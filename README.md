@@ -3,11 +3,11 @@ Read
 
 Read project is a set of APIs for a library which contains the following feature
 
-- Create book
-- Update book
+- Create book (Require authentication)
+- Update book (Require authentication)
 - List books with filteration and pagination
-- Get book details
-- Create author
+- Get book details 
+- Create author (Require authentication)
 - List authors
 - Login
 - Register
