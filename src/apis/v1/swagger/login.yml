@@ -1,0 +1,63 @@
+summary: Login
+tags:
+  - users
+consumes:
+  - application/json
+
+parameters:
+  - in: body
+    name: login data
+    description: The data of the user
+    schema:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+responses:
+    200:
+      description: Author has been created successfully
+      schema:
+        type: object
+        example: {
+          "items": [
+            {
+              "id": 1,
+              "name": "Sofyan",
+              "password": "password",
+              "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5MTg0NTQ1NSwianRpIjoiZGE0ODU0OTUtMWI4Yi00ZjA3LWFjM2UtMmVkOGJlMTc5MGIzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjkxODQ1NDU1LCJleHAiOjE2OTE4NDYzNTV9.Vf6EK5MD4otca2OQEw1us22T-8Wzh30m_TmYv0Lu7GI",
+              "username": "sofyan"
+            }
+          ],
+          "pageNo": 1,
+          "pageSize": 1,
+          "success": true,
+          "totalPages": 1
+        }
+
+    400:
+      description: Bad request
+      schema:
+        type: object
+        example: {
+          "errors": {
+            "name": [
+              "Missing data for required field."
+            ],
+            "birthday": [
+              "Missing data for required field."
+            ]
+          },
+          "success": false
+        }
+    
+    401:
+      description: Wrong credentials
+      schema:
+        type: object
+        example: {
+          "message": "This user isn't exists or password is wrong",
+          "success": false
+        }

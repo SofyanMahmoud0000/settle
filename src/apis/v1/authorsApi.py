@@ -1,5 +1,6 @@
 from . import *
 from datetime import datetime
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
 authorsMethods_bp = Blueprint('authors', __name__, url_prefix='/v1/authors')
@@ -11,7 +12,6 @@ def listAuthors():
   try: 
     
     result = controller.list()
-    print("The result of listing the authors is: {}".format(result))
     return Response.ok(result)
 
   except CustomError as e:
@@ -23,6 +23,7 @@ def listAuthors():
     raise InternalServer()
   
 @authorsMethods_bp.route('/', methods=['POST'])
+@jwt_required()
 @swag_from('swagger/createAuthor.yml')
 def createAuthor():
   try: 

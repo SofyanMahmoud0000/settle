@@ -1,0 +1,42 @@
+summary: Sign up
+tags:
+  - users
+consumes:
+  - application/json
+
+parameters:
+  - in: body
+    name: sign up data
+    description: The data of the user
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        password_confirmation:
+          type: string
+
+responses:
+    200:
+      description: Author has been created successfully
+
+
+    400:
+      description: Bad request
+      schema:
+        type: object
+        example: {
+          "errors": {
+            "name": [
+              "Missing data for required field."
+            ],
+            "birthday": [
+              "Missing data for required field."
+            ]
+          },
+          "success": false
+        }

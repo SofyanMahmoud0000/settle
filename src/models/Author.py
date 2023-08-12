@@ -14,7 +14,7 @@ class Author(Connection):
     query = """SELECT * FROM authors"""
     cursor = super().select(query)
     data = cursor.fetchall()
-    result = [{"name": element[1], "birthday": element[2]} for element in data]
+    result = [{"id":element[0],"name": element[1], "birthday": element[2]} for element in data]
     return result
   
   def checkExists(self, id):

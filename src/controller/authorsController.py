@@ -12,7 +12,6 @@ class AuthorsController:
             )
         ]
         author_id = author.insert(data)
-        print("The author has been inserted successfully and the id is {}".format(author_id))
     
     def list(self):
         return author.list()

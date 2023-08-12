@@ -41,6 +41,7 @@ parameters:
     name: pageSize
     description: The size of the page
 
+
 responses:
     200:
       description: List the books successfully
@@ -57,4 +58,7 @@ responses:
           },
           "success": false
         }
+
+    401:
+      description: Access token is missing or invalid
       

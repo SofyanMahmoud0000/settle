@@ -1,5 +1,5 @@
 from . import *
-
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 booksMethods_bp = Blueprint('books', __name__, url_prefix='/v1/books')
 controller = BooksController()
@@ -59,6 +59,7 @@ def getBook(id):
     raise InternalServer()
   
 @booksMethods_bp.route('/<id>', methods=['PUT'])
+@jwt_required()
 @swag_from('swagger/updateBook.yml')
 def updateBook(id):
   try: 
@@ -94,6 +95,7 @@ def updateBook(id):
     raise InternalServer()
   
 @booksMethods_bp.route('/', methods=['POST'])
+@jwt_required()
 @swag_from('swagger/createBook.yml')
 def createBook():
   try: 

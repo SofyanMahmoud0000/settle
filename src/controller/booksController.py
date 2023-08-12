@@ -24,7 +24,6 @@ class BooksController:
             (book_id, author_id)
         ]
         bookAuthors.insert(book_authors_data)
-        print("The book has been inserted successfully and the id is {}".format(book_id))
     
     def list(self, data):
         return book.list(data)

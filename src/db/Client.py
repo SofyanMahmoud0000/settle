@@ -24,7 +24,7 @@ class Connection:
     return Connection.connection.cursor()
   
   def insert(self, query , values):
-    logger.info("Inserting new data with query \n{} \n and values \n{}\n".format(query, values))
+    logger.info("Inserting new data with query \n{}\nand values \n{}\n".format(query, values))
     Connection.cursor.executemany(query, values)
     Connection.connection.commit()
     return Connection.cursor.lastrowid
