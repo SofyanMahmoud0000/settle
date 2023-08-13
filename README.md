@@ -1,8 +1,6 @@
 Read
 ----
 
-![Vid](https://github.com/sofyanmahmoud0000/settle/blob/master/.gitmedia/settle.mp4)
-
 Read project is a set of APIs for a library which contains the following feature
 
 - Create book (Require authentication)
@@ -13,6 +11,10 @@ Read project is a set of APIs for a library which contains the following feature
 - List authors
 - Login
 - Register
+
+## DEMO
+
+You can see a demo for the APIs from [here](https://drive.google.com/file/d/1-CuFNBWOOf5FIDn0xGqPCqG0ST4k0jsT/view?usp=sharing)
 
 
 ## DATA BASE
@@ -57,3 +59,16 @@ If you want to change the connection of the database, you can change those confi
 
 - Navigate to the url `http://localhost:5002/apidocs/` to see the APIs documentation
 
+## Build with 
+* [Python](https://www.python.org/)
+* [Flask](https://flask.palletsprojects.com/en/2.3.x/)
+* [MySQL](https://dev.mysql.com/doc/refman/8.0/en/what-is-mysql.html)
+* [Docker](https://www.docker.com/) 
+
+## Development and support 
+If you have any questions on how to use this project, or have ideas for future development, 
+please send me an e-mail to sofyan1020@gmail.com.
+
+
+## Authors
+* [Sofyan Mahmoud](https://github.com/sofyanmahmoud0000) - Software development engineer
