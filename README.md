@@ -59,16 +59,21 @@ If you want to change the connection of the database, you can change those confi
 
 - Navigate to the url `http://localhost:5002/apidocs/` to see the APIs documentation
 
-## Build with 
+## FUTURE WORK
+- Add unittest
+- Handle if the `Create book` API request has `array of author_id` instead of only one `author_id`
+- Use ORM like `SQLAlchemy` in case of extending the project to be larger
+  
+## BUILD WITH 
 * [Python](https://www.python.org/)
 * [Flask](https://flask.palletsprojects.com/en/2.3.x/)
 * [MySQL](https://dev.mysql.com/doc/refman/8.0/en/what-is-mysql.html)
 * [Docker](https://www.docker.com/) 
 
-## Development and support 
+## DEVELOPMENT AND SUPPORT 
 If you have any questions on how to use this project, or have ideas for future development, 
 please send me an e-mail to sofyan1020@gmail.com.
 
 
-## Authors
+## AUTHORS
 * [Sofyan Mahmoud](https://github.com/sofyanmahmoud0000) - Software development engineer
