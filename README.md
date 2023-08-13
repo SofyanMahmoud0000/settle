@@ -36,7 +36,7 @@ If you want to change the connection of the database, you can change those confi
 
 - Clone the project 
   ```ssh
-  git clone git@git.com:sofyanmahmoud0000/settle
+  git clone git@github.com:SofyanMahmoud0000/settle.git
   ```
 
 - Navigate to the project root directory

@@ -1,6 +1,6 @@
 from src.models.User import user
 from flask_jwt_extended import create_access_token
-from src.errorHandler.NotFound import NotFound
+from src.errorHandler.Unauthorized import Unauthorized
 from src.errorHandler.BadRequest import BadRequest
 
 class UsersController:
@@ -10,7 +10,7 @@ class UsersController:
     def login(self, data):
         retUser = user.getByUsernameAndPassword(data.get("username"), data.get("password"))
         if retUser is None:
-            raise NotFound(message="This user isn't exists or password is wrong")
+            raise Unauthorized(message="This user isn't exists or password is wrong")
         access_token = create_access_token(identity=retUser.get("id"))
         retUser['token'] = "Bearer " + access_token
         return retUser
