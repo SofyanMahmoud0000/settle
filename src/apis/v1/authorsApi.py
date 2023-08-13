@@ -27,12 +27,12 @@ def listAuthors():
 @swag_from('swagger/createAuthor.yml')
 def createAuthor():
   try: 
-    errors = createAuthorValidation.validate(request.args)
+    errors = createAuthorValidation.validate(request.json)
     if(errors):
       raise BadRequest(payload={"errors": errors})
     
-    name = request.args.get("name")
-    birthday = request.args.get("birthday")
+    name = request.json.get("name")
+    birthday = request.json.get("birthday")
     
     data = {
       "name": name,

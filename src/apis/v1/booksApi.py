@@ -69,10 +69,10 @@ def updateBook(id):
     if(errors):
       raise BadRequest(payload={"errors": errors})
     
-    name = request.args.get("name")
-    price = request.args.get("price")
-    release_date = request.args.get("release_date")
-    category = request.args.get("category")
+    name = request.json.get("name")
+    price = request.json.get("price")
+    release_date = request.json.get("release_date")
+    category = request.json.get("category")
     
     data = {
       "name": name,
@@ -99,15 +99,15 @@ def updateBook(id):
 @swag_from('swagger/createBook.yml')
 def createBook():
   try: 
-    errors = createBookValidation.validate(request.args)
+    errors = createBookValidation.validate(request.json)
     if(errors):
       raise BadRequest(payload={"errors": errors})
     
-    name = request.args.get("name")
-    price = int(request.args.get("price"))
-    release_date = request.args.get("release_date")
-    category = request.args.get("category")
-    author_id = int(request.args.get("author_id"))
+    name = request.json.get("name")
+    price = int(request.json.get("price"))
+    release_date = request.json.get("release_date")
+    category = request.json.get("category")
+    author_id = int(request.json.get("author_id"))
     
     data = {
       "name": name,

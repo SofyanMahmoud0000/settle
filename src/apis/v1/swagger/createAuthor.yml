@@ -5,14 +5,17 @@ consumes:
   - application/json
 
 parameters:
-  - in: query
-    name: name
-    type: string
-    description: The name of the author e.g. Sofyan
-  - in: query
-    name: birthday
-    type: strint
-    description: The birthday of the user e.g. 1998-02-21
+  - in: body
+    name: Author data
+    description: The data of the author
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+        birthday:
+          type: string
+          format: date
 
 responses:
     200:
@@ -33,4 +36,12 @@ responses:
             ]
           },
           "success": false
+        }
+
+    401:
+      description: Wrong credentials
+      schema:
+        type: object
+        example: {
+          "msg": "Missing Authorization Header"
         }

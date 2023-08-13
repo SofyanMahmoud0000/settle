@@ -5,27 +5,23 @@ consumes:
   - application/json
 
 parameters:
-  - in: query
-    name: name
-    type: string
-    description: The name of the book e.g. Pro Git
-  - in: query
-    name: price
-    type: integer
-    description: The price of the book e.g. 100
-  - in: query
-    name: release_date
-    type: string
-    format: date
-    description: The release date of the book
-  - in: query
-    name: category
-    type: string
-    description: The category of the book
-  - in: query
-    name: author_id
-    type: integer
-    description: The id of the author
+  - in: body
+    name: Book data
+    description: The new data of the book
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+        category:
+          type: string
+        release_date:
+          type: string
+          format: date
+        author_id:
+          type: integer
 
 responses:
     200:
@@ -63,4 +59,13 @@ responses:
         example: {
           "message": "This author doesn't exist",
           "success": false
+        }
+
+
+    401:
+      description: Wrong credentials
+      schema:
+        type: object
+        example: {
+          "msg": "Missing Authorization Header"
         }
